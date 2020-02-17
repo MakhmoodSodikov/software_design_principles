@@ -20,3 +20,5 @@ public class Point {
         return Math.sqrt( Math.pow( X - OtherPoint.X, 2 ) + Math.pow( Y - OtherPoint.Y, 2 ) );
     }
 }
+
+
