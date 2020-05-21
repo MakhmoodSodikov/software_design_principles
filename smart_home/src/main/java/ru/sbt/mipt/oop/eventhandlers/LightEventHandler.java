@@ -8,21 +8,29 @@ import static ru.sbt.mipt.oop.types.SensorEventType.*;
 
 public class LightEventHandler implements EventHandler{
 
-    public LightEventHandler() {
-
-    }
+    public LightEventHandler() { }
 
     public void executeEvent(SmartHome smartHome, SensorEvent event) {
-        if (isLightEvent(event)) {
-            // событие от источника света
-            for (Room room : smartHome.getRooms()) {
-                for (Light light : room.getLights()) {
-                    if (light.getId().equals(event.getObjectId())) {
-                        validateState(event, light, room);
-                    }
-                }
-            }
+
+        if (!isLightEvent(event)) {
+            return;
         }
+
+        smartHome.execute(component -> {
+            if (component instanceof Room) {
+                Room room = (Room) component;
+
+                room.execute(roomComponent -> {
+                    if (roomComponent instanceof Light) {
+                        Light light = (Light) roomComponent;
+
+                        if (light.getId().equals(event.getObjectId())) {
+                            validateState(event, light, room);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void validateState(SensorEvent event, Light light, Room room) {

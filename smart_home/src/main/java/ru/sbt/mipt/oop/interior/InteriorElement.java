@@ -1,6 +1,9 @@
 package ru.sbt.mipt.oop.interior;
 
-public abstract class InteriorElement {
+import ru.sbt.mipt.oop.action.Action;
+import ru.sbt.mipt.oop.action.Actionable;
+
+public abstract class InteriorElement implements Actionable {
     private String id;
     private boolean isOpen;
     private String elementType;
@@ -15,4 +18,10 @@ public abstract class InteriorElement {
     public String getId() {
         return id;
     }
+
+    @Override
+    public void execute(Action action) {
+        action.execute(this);
+    }
+
 }

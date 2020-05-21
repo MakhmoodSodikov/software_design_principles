@@ -7,21 +7,33 @@ import static ru.sbt.mipt.oop.types.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.types.SensorEventType.DOOR_OPEN;
 
 public class DoorEventHandler implements EventHandler{
-    public DoorEventHandler() {
-
-    }
+    public DoorEventHandler() { }
 
     public void executeEvent(SmartHome smartHome, SensorEvent event) {
-        if (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED) {
-            // событие от двери
-            for (Room room : smartHome.getRooms()) {
-                for (Door door : room.getDoors()) {
-                    if (door.getId().equals(event.getObjectId())) {
-                        validateState(event, door, room);
-                    }
-                }
-            }
+
+        if (!isDoorEvent(event)) {
+            return;
         }
+
+        smartHome.execute(component -> {
+            if (component instanceof Room) {
+                Room room = (Room) component;
+
+                room.execute(roomComponent -> {
+                    if (roomComponent instanceof Door) {
+                        Door door = (Door) roomComponent;
+
+                        if (door.getId().equals(event.getObjectId())) {
+                            this.validateState(event, door, room);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private boolean isDoorEvent(SensorEvent event) {
+        return (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED);
     }
 
     private void validateState(SensorEvent event, Door door, Room room) {

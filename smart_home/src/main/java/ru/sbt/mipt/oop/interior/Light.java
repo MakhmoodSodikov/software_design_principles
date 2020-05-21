@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop.interior;
 
+import ru.sbt.mipt.oop.action.Action;
+import ru.sbt.mipt.oop.action.Actionable;
+
 public class Light extends InteriorElement {
     private final String id;
     private boolean isOn;
