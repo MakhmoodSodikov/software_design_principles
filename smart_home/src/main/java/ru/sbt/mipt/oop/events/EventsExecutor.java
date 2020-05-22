@@ -8,19 +8,22 @@ import java.util.List;
 public class EventsExecutor {
     private SmartHome smartHome;
     List<EventHandler> eventHandlers;
-    public EventsExecutor(SmartHome smartHome, List<EventHandler> eventHandlers) {
+    EventGeneratorInterface eventGenerator;
+
+    public EventsExecutor(SmartHome smartHome, List<EventHandler> eventHandlers, EventGeneratorInterface eventGenerator) {
         this.smartHome = smartHome;
         this.eventHandlers = eventHandlers;
+        this.eventGenerator = eventGenerator;
     }
 
     public void startLoop(){
-        EventGenerator eventGenerator = new EventGenerator();
         SensorEvent event = eventGenerator.getNextSensorEvent();
-        EventManager eventManager = new EventManager(smartHome, eventHandlers);
 
         while (event != null) {
             System.out.println("Got event: " + event);
-            eventManager.manageEvent(event);
+            for (EventHandler handler :eventHandlers) {
+                handler.executeEvent(smartHome, event);
+            }
             event = eventGenerator.getNextSensorEvent();
         }
 

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import ru.sbt.mipt.oop.interior.Room;
 import ru.sbt.mipt.oop.interior.Door;
 import ru.sbt.mipt.oop.interior.Light;
+import ru.sbt.mipt.oop.interior.alarm.Alarm;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -26,8 +27,9 @@ public class HomeBuilder {
         Room hall = new Room(Arrays.asList(new Light("7", false), new Light("8", false), new Light("9", false)),
                 Arrays.asList(new Door(false, "4")),
                 "hall");
+        Alarm alarm = new Alarm();
 
-        SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
+        SmartHome smartHome = new SmartHome(alarm, Arrays.asList(kitchen, bathroom, bedroom, hall));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(smartHome);
 

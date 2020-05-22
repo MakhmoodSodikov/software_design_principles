@@ -10,6 +10,7 @@ public class LightEventHandler implements EventHandler{
 
     public LightEventHandler() { }
 
+    @Override
     public void executeEvent(SmartHome smartHome, SensorEvent event) {
 
         if (!isLightEvent(event)) {

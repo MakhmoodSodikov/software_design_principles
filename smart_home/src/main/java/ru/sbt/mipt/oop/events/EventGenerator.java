@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop.events;
 import ru.sbt.mipt.oop.types.SensorEventType;
 import ru.sbt.mipt.oop.sensor.SensorEvent;
 
-public class EventGenerator {
+public class EventGenerator implements EventGeneratorInterface{
     public EventGenerator() { }
 
     public SensorEvent getNextSensorEvent() {

@@ -14,6 +14,7 @@ public class HallDoorEventHandler implements EventHandler{
 
     public HallDoorEventHandler() { }
 
+    @Override
     public void executeEvent(SmartHome smartHome, SensorEvent event) {
         if (!isHallDoorEvent(event)) {
             return;
@@ -44,7 +45,7 @@ public class HallDoorEventHandler implements EventHandler{
                 Light light = (Light) component;
                 light.setState(false);
                 SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                System.out.println("Pretend we're sending command " + command);
+
             }
         });
     }
