@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.home;
+package ru.sbt.mipt.oop.loaders;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;

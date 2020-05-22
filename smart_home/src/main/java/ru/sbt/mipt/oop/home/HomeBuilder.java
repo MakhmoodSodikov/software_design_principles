@@ -6,6 +6,7 @@ import ru.sbt.mipt.oop.interior.Room;
 import ru.sbt.mipt.oop.interior.Door;
 import ru.sbt.mipt.oop.interior.Light;
 import ru.sbt.mipt.oop.interior.alarm.Alarm;
+import ru.sbt.mipt.oop.loaders.HomeJsonDataWriter;
 
 import java.io.IOException;
 import java.util.Arrays;

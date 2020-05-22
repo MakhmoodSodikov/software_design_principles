@@ -24,6 +24,14 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>io.spring.repo.maven.release</id>
+            <url>http://repo.spring.io/release/</url>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

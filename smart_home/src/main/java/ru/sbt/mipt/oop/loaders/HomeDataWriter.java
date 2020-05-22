@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.home;
+package ru.sbt.mipt.oop.loaders;
 
 public interface HomeDataWriter {
     boolean writeData();
