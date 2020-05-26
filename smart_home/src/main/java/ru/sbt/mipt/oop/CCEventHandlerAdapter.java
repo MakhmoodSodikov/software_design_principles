@@ -3,8 +3,8 @@ package ru.sbt.mipt.oop;
 import ru.sbt.mipt.oop.eventhandlers.EventHandler;
 import ru.sbt.mipt.oop.home.SmartHome;
 import ru.sbt.mipt.oop.sensor.SensorEvent;
-import ru.sbt.mipt.oop.smarthome.CCEventHandler;
-import ru.sbt.mipt.oop.smarthome.CCSensorEvent;
+import smarthome.CCEventHandler;
+import smarthome.CCSensorEvent;
 import ru.sbt.mipt.oop.types.SensorEventType;
 
 import java.util.Map;

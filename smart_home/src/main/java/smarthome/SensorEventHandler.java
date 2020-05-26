@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.smarthome;
+package smarthome;
 
 
 import java.util.ArrayList;

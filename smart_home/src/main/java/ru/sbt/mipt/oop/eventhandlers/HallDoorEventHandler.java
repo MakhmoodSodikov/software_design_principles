@@ -1,4 +1,5 @@
 package ru.sbt.mipt.oop.eventhandlers;
+import ru.sbt.mipt.oop.commandsender.CommandSenderInterface;
 import ru.sbt.mipt.oop.home.SmartHome;
 import ru.sbt.mipt.oop.interior.Door;
 import ru.sbt.mipt.oop.interior.Light;
@@ -12,7 +13,11 @@ import static ru.sbt.mipt.oop.types.SensorEventType.DOOR_OPEN;
 
 public class HallDoorEventHandler implements EventHandler{
 
-    public HallDoorEventHandler() { }
+    CommandSenderInterface cmd;
+
+    public HallDoorEventHandler(CommandSenderInterface cmdint) {
+        this.cmd = cmdint;
+    }
 
     @Override
     public void executeEvent(SmartHome smartHome, SensorEvent event) {

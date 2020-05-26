@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.smarthome;
+package smarthome;
 
 public class CCSensorEvent {
     private final String eventType;

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.sbt.mipt.oop.smarthome.SensorEventHandler;
+import smarthome.SensorEventHandler;
 import ru.sbt.mipt.oop.spingconfigs.SpringConfig;
 
 public class Application {
