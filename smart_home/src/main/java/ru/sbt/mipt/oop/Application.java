@@ -1,13 +1,12 @@
 package ru.sbt.mipt.oop;
-import ru.sbt.mipt.oop.eventhandlers.DoorEventHandler;
-import ru.sbt.mipt.oop.eventhandlers.HallDoorEventHandler;
-import ru.sbt.mipt.oop.eventhandlers.LightEventHandler;
+import ru.sbt.mipt.oop.eventhandlers.*;
 import ru.sbt.mipt.oop.events.*;
 import ru.sbt.mipt.oop.home.HomeJsonDataLoader;
 import ru.sbt.mipt.oop.home.SmartHome;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 public class Application {
 
@@ -16,12 +15,13 @@ public class Application {
         HomeJsonDataLoader HomeInstance = new HomeJsonDataLoader("smart-home-1.json");
         SmartHome smartHome = HomeInstance.loadData();
 
+        List<EventHandler> handlers = Arrays.asList(new AlarmEventHandler(),
+                new SmsDecorator(Arrays.asList(new DoorEventHandler(),
+                        new LightEventHandler(),
+                        new HallDoorEventHandler())));
+
         // начинаем цикл обработки событий
-        EventsExecutor eventsExec = new EventsExecutor(smartHome, Arrays.asList(
-                new LightEventHandler(),
-                new DoorEventHandler(),
-                new HallDoorEventHandler()
-        ));
+        EventsExecutor eventsExec = new EventsExecutor(smartHome, handlers, new CustomEventGenerator());
 
         eventsExec.startLoop();
     }

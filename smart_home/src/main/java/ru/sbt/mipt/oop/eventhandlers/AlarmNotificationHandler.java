@@ -24,8 +24,8 @@ public class AlarmNotificationHandler implements EventHandler {
             System.out.println("Sending sms.");
             return;
         }
-
-        eventHandlers.forEach(handler -> handler.executeEvent(smartHome, event));
+        if (!smartHome.getAlarm().isActivated())
+            eventHandlers.forEach(handler -> handler.executeEvent(smartHome, event));
 
         if (smartHome.getAlarm().isActivated()) {
             System.out.println("Sending sms.");

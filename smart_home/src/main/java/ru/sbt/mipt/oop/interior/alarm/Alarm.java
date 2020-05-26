@@ -21,11 +21,11 @@ public class Alarm {
         return state instanceof WarningModeAlarmState;
     }
 
-    public void setState(AlarmState state) {
+    private void setState(AlarmState state) {
         this.state = state;
     }
 
-    public String getCode() {
+    private String getCode() {
         return code;
     }
 

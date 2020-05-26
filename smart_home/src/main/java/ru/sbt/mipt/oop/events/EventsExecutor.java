@@ -8,9 +8,9 @@ import java.util.List;
 public class EventsExecutor {
     private SmartHome smartHome;
     List<EventHandler> eventHandlers;
-    EventGeneratorInterface eventGenerator;
+    EventGenerator eventGenerator;
 
-    public EventsExecutor(SmartHome smartHome, List<EventHandler> eventHandlers, EventGeneratorInterface eventGenerator) {
+    public EventsExecutor(SmartHome smartHome, List<EventHandler> eventHandlers, EventGenerator eventGenerator) {
         this.smartHome = smartHome;
         this.eventHandlers = eventHandlers;
         this.eventGenerator = eventGenerator;
