@@ -28,12 +28,13 @@ public class SpringConfig {
 
     @Bean
     public Map<String, SensorEventType> ccEventTypeToEventTypeMap() {
-        return new HashMap<String, SensorEventType>() {{
-            put("LightIsOn", SensorEventType.LIGHT_ON);
-            put("LightIsOff", SensorEventType.LIGHT_OFF);
-            put("DoorIsOpen", SensorEventType.DOOR_OPEN);
-            put("DoorIsClosed", SensorEventType.DOOR_CLOSED);
-        }};
+        HashMap<String, SensorEventType> map = new HashMap<String, SensorEventType>();
+        map.put("LightIsOn", SensorEventType.LIGHT_ON);
+        map.put("LightIsOff", SensorEventType.LIGHT_OFF);
+        map.put("DoorIsOpen", SensorEventType.DOOR_OPEN);
+        map.put("DoorIsClosed", SensorEventType.DOOR_CLOSED);
+
+        return map;
     }
 
     @Bean
@@ -50,18 +51,15 @@ public class SpringConfig {
     @Bean
     @Autowired
     public SensorEventHandler sensorEventsManager(List<EventHandler> eventHandlers,
-                                                  SmartHome smartHome, Map<String, SensorEventType> ccEventTypeToEventTypeMap) {
+                                                       SmartHome smartHome, Map<String, SensorEventType> eventTypeMap) {
         SensorEventHandler sensorEventsManager = new SensorEventHandler();
 
-        sensorEventsManager.registerEventHandler(
-                new CCEventHandlerAdapter(
-                        new AlarmNotificationHandler(eventHandlers),
-                        smartHome,
-                        ccEventTypeToEventTypeMap
-                )
-        );
+        eventHandlers.forEach(eventHandler -> {
+            sensorEventsManager.registerEventHandler(new CCEventHandlerAdapter(eventHandler, smartHome, eventTypeMap));
+        });
 
         return sensorEventsManager;
+
     }
 
     @Bean
